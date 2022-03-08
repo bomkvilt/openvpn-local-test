@@ -14,6 +14,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repo
         openvpn-auth-pam        \
         google-authenticator    \
         pamtester               \
+        tree                    \
     && \
     apk add --virtual           \
         temppkg                 \
@@ -41,9 +42,9 @@ COPY scripts      "${APP_INSTALL}/scripts"
 ENV APP_PERSIST "/opt/openvpn_data"
 ENV APP_PKI     "${APP_PERSIST}/pki"
 
-RUN mkdir -p "${APP_PERSIST}" && \
-    cd "${APP_PERSIST}"       && \
-    ${EASYRSA}/easyrsa init-pki
+# RUN mkdir -p "${APP_PERSIST}" && \
+#     cd "${APP_PERSIST}"       && \
+#     ${EASYRSA}/easyrsa init-pki
 
 # configuration files are placed in a /etc/
 ENV OPENVPN            "/etc/openvpn"
@@ -53,7 +54,7 @@ ENV OVPN_CLIENT_CONFIG "${OPENVPN}/client.ovpn"
 COPY configs/server.conf "${OVPN_SERVER_CONFIG}"
 COPY configs/client.ovpn "${OVPN_CLIENT_CONFIG}"
 
-VOLUME ["${APP_PERSIST}"]
+# VOLUME ["${APP_PERSIST}"]
 
 RUN find "${APP_INSTALL}/scripts/" -type f -iname "*.sh" -exec chmod +x {} \;
 

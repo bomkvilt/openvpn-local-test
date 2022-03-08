@@ -1,0 +1,9 @@
+✔ how to map configs to files @started(22-03-08 12:05) @done(22-03-08 13:02) @lasted(57m42s)
+create configs:
+    ✔ settings @done(22-03-08 13:03)
+    ✔ vars @started(22-03-08 13:04) @done(22-03-08 13:10) @lasted(6m36s)
+✔ create a persistent dir @started(22-03-08 13:11) @done(22-03-08 13:36) @lasted(25m33s)
+✔ create deployment @done(22-03-08 13:36)
+✔ create service @done(22-03-08 13:48)
+✔ force claster to work @started(22-03-08 13:48) @done(22-03-08 16:05) @lasted(2h17m14s)
+☐ test that vpn is steal working @started(22-03-08 16:05)

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openvpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openvpn
+  template:
+    metadata:
+      labels:
+        app: openvpn
+    spec:
+      volumes:
+      - name: ovpn-configs
+        configMap: {name: ovpn-configs}
+      - name: ovpn-vars
+        configMap: {name: ovpn-vars}
+      - name: ovpn-data
+        persistentVolumeClaim: {claimName: ovpn-data-pvc}
+      containers:
+      - name: openvpn-server
+        image: bomkvilt.openvpn:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:   {cpu: 200m, memory: 100Mi}
+          requests: {cpu: 100m, memory: 50Mi }
+        securityContext:
+          capabilities:
+            add: [NET_ADMIN]
+        ports:
+        - {name: openvpn-inlet, containerPort: 1194, protocol: UDP}
+        volumeMounts:
+        # mount individual configuration files
+        - {name: ovpn-configs, mountPath: /etc/openvpn/server.conf, subPath: server.conf}
+        - {name: ovpn-configs, mountPath: /etc/openvpn/client.ovpn, subPath: client.ovpn}
+        - {name: ovpn-vars,    mountPath: /usr/share/easy-rsa/vars, subPath: vars}
+        # mount persistance valumes
+        # \note 
+        - {name: ovpn-data,    mountPath: /opt/openvpn_data}
+        # env:
+        # - name: HOST_ADDR
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: status.podIP

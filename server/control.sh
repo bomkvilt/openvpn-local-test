@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG='openvpn-server:latest'
+TAG='bomkvilt.openvpn:latest'
 
 function do_build() {
     docker build -t $TAG .
@@ -15,11 +15,7 @@ function do_deploy {
 }
 
 
-# go to a local directory
-# \note popd is not nessessary in case of a terminal launch
 pushd $(dirname "$0")
-
-
 if [ "$1" == "build" ]; then
     do_build
 elif [ "$1" == "stop" ]; then

@@ -33,10 +33,20 @@ iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 # create a CA certificate on a first launch
 # ------------------------------------------------
 
+[ -d "${APP_PERSIST}" ] || mkdir "${APP_PERSIST}"
 cd "${APP_PERSIST}"
 
+echo "$(datef) ls -lh: $(ls -lh)"
+echo "$(datef) tree -L 2: $(tree -L 2)"
+
 LOCKFILE="${APP_PERSIST}/.initialized"
-if [ ! -f $LOCKFILE ]; then
+echo "$(datef) checking a lock file '${LOCKFILE}' ..."
+if [ ! -e "${LOCKFILE}" ]; then
+    echo "$(datef) Initializing server secrets at '$(pwd)'"
+
+    ${EASYRSA}/easyrsa init-pki
+    echo "$(datef) tree: $(tree)"
+
     # >>
     # DH parameters of size 2048 created at ${APP_PKI}/dh.pem
     ${EASYRSA}/easyrsa gen-dh
@@ -68,6 +78,8 @@ EOF
     # \note can cause a race
     # \note commit that all files are created
     touch $LOCKFILE
+else
+    echo "$(datef) Using preinitilized server secrets at '$(pwd)'"
 fi
 
 # ------------------------------------------------

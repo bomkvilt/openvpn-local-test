@@ -6,4 +6,6 @@ create configs:
 ✔ create deployment @done(22-03-08 13:36)
 ✔ create service @done(22-03-08 13:48)
 ✔ force claster to work @started(22-03-08 13:48) @done(22-03-08 16:05) @lasted(2h17m14s)
-☐ test that vpn is steal working @started(22-03-08 16:05)
+✔ test that vpn is steal working @started(22-03-08 16:05) @done(22-03-08 20:05) @lasted(4h31s)
+✔ deploy to google cloud platform @started(22-03-08 20:05) @done(22-03-09 01:35) @lasted(5h30m48s)
+☐ get cluster ip @started(22-03-09 01:36)

@@ -1,0 +1,5 @@
+
+commonLabels:
+  app.kubernetes.io/managed-by: helm
+
+repo_prefix: ''

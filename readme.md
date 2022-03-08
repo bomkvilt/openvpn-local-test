@@ -1,24 +1,14 @@
 # Local OpenVPN deployment test
 
-This project is a sandbox that allow to understand how to deploy an OpenVPN instrastracture.
-The infrastructure consists from three elemenst:
-- **CA**     — Certification Authotity — entity that sign sertification requests
-- **Server** —
-- **Client** —
-
-In the small implementation I find it redundant to have separate CA container couse it requires to
-    build a multiservice architecture:
-- deploy a DNS
-- create additional daemons on a client and server siztes create new client serts
-
-To semplify the infrastructure it's need to
-- combine CA and server in one instance
-- place PKI derectory into an external volume
+This is a pet project that:
+- dockerize an OpenVPN server with integrated CA
+    - allow to launch the container locally
+- integrates the containter to kubernetes
+    - allow to launch the cluster locally
+- deploy the cluster to google cloud platform
 
 
----
-
-## Related links
+## Related links DRAFT
 
 | what | note | url |
 | :--- | :--- | :-- |
@@ -27,3 +17,9 @@ To semplify the infrastructure it's need to
 | step-by-step doc from DO            |      | https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-ubuntu-20-04 |
 | step-by-step doc from OpenVPN       |      | https://openvpn.net/community-resources/how-to/ |
 |                                     |      | https://openvpn.net/community-resources/setting-up-your-own-certificate-authority-ca/ |
+
+## google coud deploy
+|    |    |
+|----|----|
+| connect cluster | https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#generate_kubeconfig_entry |
+| load image      | https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app |

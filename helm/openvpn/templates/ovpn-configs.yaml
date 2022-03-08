@@ -45,7 +45,7 @@ data:
     ; tls-auth /etc/openvpn/ta.key 0
 
     # domain to pass throw VPN
-    push "route youtube.com vpn_gateway"
+    push "route meduza.io vpn_gateway"
 
   client.ovpn: |
     client
